@@ -1,0 +1,24 @@
+---
+# this interval will be used to get new data from pingdom and as sleep interval if any exception will appear
+check_interval: 60
+# port on which exporter will listen for connections
+listen_port: 8000
+# API url to get checks stats
+url: 'https://api.pingdom.com/api/2.1/checks'
+# set timeout for request
+timeout: 10
+# headers to use for authentication
+# use curl to get valid Authorization header if needed:
+# 'curl -v -u my_user:my_pass google.com |& grep Authorization' to get
+headers:
+  Account-Email: 'my_email@example.com'
+  App-Key: 'my_api_key'
+  Authorization: 'my_base64_http_auth_line'
+# mapping pindom statuses to integers
+# https://www.pingdom.com/resources/api/2.1/#ResourceChecks
+status_map:
+  up: 1
+  down: 0
+  unconfirmed_down: 1
+  unknown: 1
+  paused: 1

@@ -1,0 +1,7 @@
+version: '3'
+services:
+  pingdom-exporter:
+    build:
+      context: ./
+    image: shalb/prometheus-pingdom-exporter:0.0.1
+
