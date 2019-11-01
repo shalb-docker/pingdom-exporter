@@ -89,19 +89,19 @@ def parse_data_checks(json_data):
         }
 
         for name in timestamp_metrics:
-            metric_name = '{0}_check_{1}_timestamp_seconds'.format(conf['name'], name)
+            metric_name = '{0}_exporter_check_{1}_timestamp_seconds'.format(conf['name'], name)
             description = timestamp_metrics[name]
             value = check[name]
             metric = {'metric_name': metric_name, 'labels': labels, 'description': description, 'value': value}
             data.append(metric)
 
-        metric_name = '{0}_check_lastresponsetime_seconds'.format(conf['name'])
+        metric_name = '{0}_exporter_check_lastresponsetime_seconds'.format(conf['name'])
         description = 'Response time in seconds of last test.'
         value = check['lastresponsetime'] / 1000
         metric = {'metric_name': metric_name, 'labels': labels, 'description': description, 'value': value}
         data.append(metric)
 
-        metric_name = '{0}_check_status'.format(conf['name'])
+        metric_name = '{0}_exporter_check_status'.format(conf['name'])
         description = 'Current status of check ({0})'.format(conf['status_map'])
         value = conf['status_map'][check['status']]
         metric = {'metric_name': metric_name, 'labels': labels, 'description': description, 'value': value}
