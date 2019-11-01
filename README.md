@@ -12,7 +12,8 @@ docker-compose -f docker-compose-build.yml push
 
 ## configuration
 
-Add your headers to 'headers' section of config file pingdom-exporter/pingdom_exporter.py.yml
+Add your token to env_secrets or to 'token' key in config file pingdom-exporter/pingdom_exporter.py.yml
+In case of any custom problems you can use 'headers' section of config file pingdom-exporter/pingdom_exporter.py.yml
 
 ## run
 

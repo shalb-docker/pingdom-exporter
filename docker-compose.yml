@@ -1,10 +1,12 @@
 version: '3'
 services:
   pingdom-exporter:
-    image: shalb/prometheus-pingdom-exporter:0.0.1
-    volumes:
-      - ./pingdom-exporter/pingdom_exporter.py.yml:/opt/pingdom/pingdom_exporter.py.yml
-   #restart: always
+    image: shalb/pingdom-exporter:0.0.1
+   #volumes:
+   #  - ./pingdom-exporter/pingdom_exporter.py.yml:/opt/pingdom/pingdom_exporter.py.yml
+    restart: always
    #ports:
-   #  - "8001:8001"
+   #  - "9158:9158"
+    env_file:
+      - ./env_secrets
 
