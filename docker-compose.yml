@@ -8,5 +8,6 @@ services:
    #ports:
    #  - "9158:9158"
     env_file:
-      - ./env_secrets
+      - ./pingdom-exporter/env
+      - ./pingdom-exporter/env_secrets
 

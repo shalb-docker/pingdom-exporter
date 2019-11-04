@@ -35,6 +35,8 @@ def get_config(args):
     token = os.environ.get('PINGDOM_EXPORTER_TOKEN')
     if token:
         conf['token'] = token
+    conf['domains_to_exclude'] = str(os.environ.get('DOMAINS_TO_EXCLUDE')).split()
+    conf['domains_to_include'] = str(os.environ.get('DOMAINS_TO_INCLUDE')).split()
 
 def configure_logging():
     '''Configure logging module'''
@@ -72,7 +74,11 @@ def get_data_checks():
 def parse_data_checks(json_data):
     '''Parse checks data received via API'''
     for check in json_data['checks']:
-#       log.info('{0}\n'.format(check))
+        if check['hostname'] in conf['domains_to_exclude']:
+            continue
+        if conf['domains_to_include']:
+            if check['hostname'] not in conf['domains_to_include']:
+                continue
         labels = dict()
         labels['id'] = label_clean(check['id'])
         labels['name'] = label_clean(check['name'])
@@ -89,6 +95,8 @@ def parse_data_checks(json_data):
         }
 
         for name in timestamp_metrics:
+            if name not in check:
+                continue
             metric_name = '{0}_exporter_check_{1}_timestamp_seconds'.format(conf['name'], name)
             description = timestamp_metrics[name]
             value = check[name]
