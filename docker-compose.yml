@@ -4,10 +4,11 @@ services:
     image: shalb/pingdom-exporter:0.0.1
    #volumes:
    #  - ./pingdom-exporter/pingdom_exporter.py.yml:/opt/pingdom/pingdom_exporter.py.yml
+   #  - ./pingdom-exporter/pingdom-exporter_token:/run/secrets/pingdom-exporter_token
     restart: always
    #ports:
    #  - "9158:9158"
     env_file:
-      - ./pingdom-exporter/env
+   #  - ./pingdom-exporter/env
       - ./pingdom-exporter/env_secrets
 

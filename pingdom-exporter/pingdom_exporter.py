@@ -34,7 +34,11 @@ def get_config(args):
             conf[key] = conf_yaml[key]
     token = os.environ.get('PINGDOM_EXPORTER_TOKEN')
     if token:
-        conf['token'] = token
+        if os.path.isfile(token):
+            with open(token) as token_file:
+                conf['token'] = token_file.read().strip()
+        else:
+            conf['token'] = token
     conf['domains_to_exclude'] = str(os.environ.get('DOMAINS_TO_EXCLUDE')).split()
     conf['domains_to_include'] = str(os.environ.get('DOMAINS_TO_INCLUDE')).split()
 
