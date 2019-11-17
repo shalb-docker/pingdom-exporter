@@ -1,7 +1,7 @@
 version: '3'
 services:
   pingdom-exporter:
-    image: shalb/pingdom-exporter:0.0.1
+    image: shalb/pingdom-exporter:0.0.2
    #volumes:
    #  - ./pingdom-exporter/pingdom_exporter.py.yml:/opt/pingdom/pingdom_exporter.py.yml
    #  - ./pingdom-exporter/pingdom-exporter_token:/run/secrets/pingdom-exporter_token

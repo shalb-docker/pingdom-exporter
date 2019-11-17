@@ -142,8 +142,7 @@ data = list()
 pingdom_exporter_up = prometheus_client.Gauge('pingdom_exporter_up', 'pingdom exporter scrape status')
 pingdom_exporter_errors_total = prometheus_client.Counter('pingdom_exporter_errors_total', 'exporter scrape errors total counter')
 
-#class Collector(object):
-class Collector():
+class Collector(object):
     def collect(self):
         # add static metrics
         gauge = prometheus_client.core.GaugeMetricFamily
