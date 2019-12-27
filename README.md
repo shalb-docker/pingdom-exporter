@@ -15,6 +15,7 @@ docker-compose -f docker-compose-build.yml push
 Add your token to env_secrets or to 'token' key in config file pingdom-exporter/pingdom_exporter.py.yml
 In case of any custom problems you can use 'headers' section of config file pingdom-exporter/pingdom_exporter.py.yml
 If env variable 'PINGDOM_EXPORTER_TOKEN' is existing file, then its content will be used as token (needed in case of secret mounted as file).
+Add appropriate variables to include or exclude some hosts if you need metrics only for particular hosts(see example in env file).
 
 ## run
 

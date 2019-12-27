@@ -39,8 +39,19 @@ def get_config(args):
                 conf['token'] = token_file.read().strip()
         else:
             conf['token'] = token
-    conf['domains_to_exclude'] = str(os.environ.get('DOMAINS_TO_EXCLUDE')).split()
-    conf['domains_to_include'] = str(os.environ.get('DOMAINS_TO_INCLUDE')).split()
+    log_level = os.environ.get('PINGDOM_EXPORTER_LOG_LEVEL')
+    if log_level:
+        conf['log_level'] = log_level
+    domains_to_exclude = os.environ.get('DOMAINS_TO_EXCLUDE')
+    if domains_to_exclude:
+        conf['domains_to_exclude'] = str(domains_to_exclude).split()
+    else:
+        conf['domains_to_exclude'] = list()
+    domains_to_include = os.environ.get('DOMAINS_TO_INCLUDE')
+    if domains_to_include:
+        conf['domains_to_include'] = str(domains_to_include).split()
+    else:
+        conf['domains_to_include'] = list()
 
 def configure_logging():
     '''Configure logging module'''
@@ -77,12 +88,15 @@ def get_data_checks():
 
 def parse_data_checks(json_data):
     '''Parse checks data received via API'''
+    hosts = [check['hostname'] for check in json_data['checks']]
+    log.debug('Available hosts: {0}'.format(hosts))
     for check in json_data['checks']:
         if check['hostname'] in conf['domains_to_exclude']:
             continue
         if conf['domains_to_include']:
             if check['hostname'] not in conf['domains_to_include']:
                 continue
+        log.debug('Parsing host: {0}'.format(check['hostname']))
         labels = dict()
         labels['id'] = label_clean(check['id'])
         labels['name'] = label_clean(check['name'])

@@ -3,5 +3,5 @@ services:
   pingdom-exporter:
     build:
       context: ./
-    image: shalb/pingdom-exporter:0.0.2
+    image: shalb/pingdom-exporter:0.0.3
 
